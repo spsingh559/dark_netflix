@@ -1,0 +1,190 @@
+//Dark - Netflix
+
+//Kahnwald Family
+create (daneil:Person{name:"Daneil Kahnwald", description:"High ranking police officer in 1953"})
+create (ines:Person{name:"Ines Kahnwald", description:"Nurse in 1986"})
+create (sebastian:Person{name:"Sebastian Kruger", description:"unknown"})
+create (michael:Person{name:"Michael Kahnwald", description:"sucide by hanging in 2019"})
+create (hannah:Person{name:"Hannah Kahnwald", description:"freelace masseur"})
+create (jonas:Person{name:"Jonas Kahnwald", description:"Protagonist"})
+create (adam:Person{name:"Adam", description:"founder of Sic Mundus"})
+
+//Nielsen Family character
+create (noah:Person{name:"Noah", description:"unknown"})
+create (agnes:Person{name:"Agnes Nielsen", description:"unknown"})
+create (jana:Person{name:"Jana Nielsen", description:"unknown"})
+create (tronte:Person{name:"Tronte Nielsen", description:"unknown"})
+create (katharina:Person{name:"Katharina Nielsen", description:"school principal"})
+create (ulrich:Person{name:"Ulrich Nielsen", description:"police officer"})
+create (mikkel:Person{name:"Mikkel Nielsen", description:"unknown"})
+create (martha:Person{name:"Martha Nielsen", description:"unknown"})
+create (magnus:Person{name:"Magnus Nielsen", description:"unknown"})
+create (mads:Person{name:"Mads Nielsen", description:"missing since 1986"})
+
+//Tiedermann Family
+
+create (doris:Person{name:"Doris Tiedermann", description:"unknown"})
+create (egon:Person{name:"Egon Tiedermann", description:"police officer in 1953 and 1986"})
+create (claudia:Person{name:"Claudia Tiedermann", description:"head of nuclear power plant in 1986"})
+create (boris:Person{name:"Boris Niewald", description:"known as Aleksader Kohler/Tidermann, head of nuclear plant in 2019"})
+create (regina:Person{name:"Regina Tiedermann", description:"hotel owner"})
+create (bartosz:Person{name:"Bartosz Tiedermann", description:"jonas best friend, martha's boyfriend"})
+
+//Doppler Family
+create (tannhaus:Person{name:"H.G Tannhaus", description:"watchmaker in 1953, scientist in 1986"})
+create (greta:Person{name:"Greta Doppler", description:"unknown"})
+create (bernd:Person{name:"Bernd Doppler", description:"head of nucler plant in 1953"})
+create (helge:Person{name:"Helge Doppler", description:"bullied boy in 1953, nucler plant employee in 1986"})
+create (charlotte:Person{name:"Charlotte Doppler", description:"Police officer"})
+create (peter:Person{name:"Peter Doppler", description:"pshycologist"})
+create (elisabeth:Person{name:"Elisabeth Doppler", description:"deaf girl"})
+create (franziska:Person{name:"Franziska Doppler", description:"unknown"})
+
+//create timeline
+create (t1:Timeline{name:1921})
+create (t2:Timeline{name:1953})
+create (t3:Timeline{name:1986})
+create (t4:Timeline{name:2019})
+create (t5:Timeline{name:2052})
+
+//create organization
+create (sic:Organisation{name:"Sic Mundus"})
+
+//relations
+
+create 
+(daneil)-[:HAS_RELATION{name:"Father"}]->(ines),
+(ines)-[:HAS_RELATION{name:'adopted Mother'}]->(michael),
+(michael)-[:HAS_RELATION{name:"Married"}]->(hannah),
+(michael)-[:HAS_RELATION{name:"Alias"}]->(mikkel),
+(michael)-[:HAS_RELATION{name:"Father"}]->(jonas),
+(hannah)-[:HAS_RELATION{name:"Mother"}]->(jonas),
+(hannah)-[:HAS_RELATION{name:"Affair"}]->(ulrich),
+(jonas)-[:HAS_RELATION{name:"Affair"}]->(martha),
+
+(noah)-[:HAS_RELATION{name:"Siblings"}]->(agnes),
+(agnes)-[:HAS_RELATION{name:"Affair"}]->(doris),
+(jana)-[:HAS_RELATION{name:"Married"}]->(tronte),
+(tronte)-[:HAS_RELATION{name:"Father"}]->(ulrich)<-[:HAS_RELATION{name:"Mother"}]-(jana),
+(tronte)-[:HAS_RELATION{name:"Affair"}]->(claudia),
+(tronte)-[:HAS_RELATION{name:"Father"}]->(mads)<-[:HAS_RELATION{name:"Mother"}]-(jana),
+(ulrich)-[:HAS_RELATION{name:"Siblings"}]->(mads),
+(katharina)-[:HAS_RELATION{name:"Married"}]->(ulrich),
+(ulrich)-[:HAS_RELATION{name:"Father"}]->(mikkel)<-[:HAS_RELATION{name:"Mother"}]-(katharina),
+(ulrich)-[:HAS_RELATION{name:"Father"}]->(martha)<-[:HAS_RELATION{name:"Mother"}]-(katharina),
+(ulrich)-[:HAS_RELATION{name:"Father"}]->(magnus)<-[:HAS_RELATION{name:"Mother"}]-(katharina),
+(mikkel)-[:HAS_RELATION{name:"Siblings"}]->(martha)<-[:HAS_RELATION{name:"Siblings"}]-(magnus)-[:HAS_RELATION{name:"Siblings"}]->(mikkel),
+
+(doris)-[:HAS_RELATION{name:"Married"}]->(egon),
+(egon)-[:HAS_RELATION{name:"Father"}]->(claudia),
+(doris)-[:HAS_RELATION{name:"Mother"}]->(claudia),
+(claudia)-[:HAS_RELATION{name:"Mother"}]->(regina),
+(regina)-[:HAS_RELATION{name:"Married"}]->(boris),
+(boris)-[:HAS_RELATION{name:"Father"}]->(bartosz)<-[:HAS_RELATION{name:"Mother"}]-(regina),
+
+
+(tannhaus)-[:HAS_RELATION{name:"Adaptive Grand Father"}]->(charlotte),
+(greta)-[:HAS_RELATION{name:"Married"}]->(bernd),
+(bernd)-[:HAS_RELATION{name:"Father"}]->(helge)<-[:HAS_RELATION{name:"Mother"}]-(greta),
+(helge)-[:HAS_RELATION{name:"Father"}]->(peter),
+(peter)-[:HAS_RELATION{name:"Married"}]->(charlotte),
+(peter)-[:HAS_RELATION{name:"Father"}]->(elisabeth)<-[:HAS_RELATION{name:"Mother"}]-(charlotte),
+(peter)-[:HAS_RELATION{name:"Father"}]->(franziska)<-[:HAS_RELATION{name:"Mother"}]-(charlotte),
+(elisabeth)-[:HAS_RELATION{name:"Siblings"}]->(franziska),
+(franziska)-[:HAS_RELATION{name:"Affair"}]->(magnus),
+(noah)-[:HAS_RELATION{name:"Father"}]->(charlotte),
+
+(daneil)-[:HAS_RELATION{name:"Senior Officer"}]->(egon),
+(martha)-[:HAS_RELATION{name:"Aunt"}]->(jonas),
+(jonas)-[:HAS_RELATION{name:"Alias"}]->(adam),
+(adam)-[:HAS_RELATION{name:"follower"}]->(sic),
+(magnus)-[:HAS_RELATION{name:"follower"}]->(sic),
+(agnes)-[:HAS_RELATION{name:"follower"}]->(sic),
+(noah)-[:HAS_RELATION{name:"follower"}]->(sic),
+(elisabeth)-[:HAS_RELATION{name:"Mother", description:"At some point since 2019, she and Noah conceived a daughter, who was hidden somewhere in time and grew up to be Charlotte, who eventually gave birth to Elisabeth, her own mother."}]->(charlotte),
+(elisabeth)-[:HAS_RELATION{name:"Affair"}]->(noah)
+
+
+//Time travelled
+create
+(jonas)-[:HAS_TIME_TRAVELLED{description:"Young Jonas is institutionalized after his father's suicide; then, when his girlfriend's brother disappears, he stumbles upon the truth of the town's portal through time."}]->(t4),
+(jonas)-[:HAS_TIME_TRAVELLED{description:"Adult Jonas becomes a time-travelling warrior opposing the evil Noah, going back to 2019 where he's known simply as The Stranger before his true identity is revealed"}]->(t5),
+(jonas)-[:HAS_TIME_TRAVELLED{description:"Under the alias Adam, an even older Jonas (presumably from 2085) leads the secret organization Sic Mundus, which seeks to harness time travel to defeat time and create a paradise by causing an apocalypse."}]->(t1),
+
+(hannah)-[:HAS_TIME_TRAVELLED{description:"As a young schoolgirl, Hannah harbored an unrequited crush on Ulrich Nielsen; she falsely accused him of rape after witnessing him have sex with his girlfriend, Katharina"}]->(t3),
+(hannah)-[:HAS_TIME_TRAVELLED{description:"She carries on an affair with Ulrich, although the stress of her husband's suicide and his son's disappearance break them apart. She travels back to find him in 1953 and decides to stay."}]->(t4),
+
+
+(mikkel)-[:HAS_TIME_TRAVELLED{description:"Young Mikkel arrives in the past from 2019 after going through the portal, is adopted by Ines Kahnwald, and raised as Michael, eventually fathering Jonas"}]->(t3),
+(mikkel)-[:HAS_TIME_TRAVELLED{description:"Michael Kahnwald takes his own life, leaving a note explaining his true identity to Jonas. A few months later, his younger self, Mikkel, goes missing"}]->(t4),
+
+(ines)-[:HAS_TIME_TRAVELLED{description:"Young Ines is the daughter of Winden police chief Daniel Kahnwald."}]->(t2),
+(ines)-[:HAS_TIME_TRAVELLED{description:"Now a nurse, Ines takes Mikkel/Michael in, but drugs him with sleeping pills to avoid having him questioned by new polic chief Egon Tiedemann"}]->(t3),
+(ines)-[:HAS_TIME_TRAVELLED{description:"Ines holds onto Michael's suicide note per his instructions, delivering it to Jonas at the precise moment young Mikkel goes missing"}]->(t4),
+
+(daneil)-[:HAS_TIME_TRAVELLED{description:"Daniel is the Winden chief of police and boss of young Egon Tiedemann. The identity of his wife, Ines' mother, is still unknown."}]->(t2),
+
+(martha)-[:HAS_TIME_TRAVELLED{description:"Since Martha's missing younger brother Mikkel is actually her ex-boyfriend's father Michael, that makes Martha Jonas aunt.  After she's shot and killed by Jonas older self, Adam"}]->(t4),
+
+(magnus)-[:HAS_TIME_TRAVELLED{description:"Martha's brother is saved from the apocalypse by Adult Jonas, who whisks him and his cohorts Franziska and Bartosz through time."}]->(t4),
+(magnus)-[:HAS_TIME_TRAVELLED{description:"Magnus ends up as an acolyte of Sic Mundus, serving under Adam."}]->(t1),
+
+(katharina)-[:HAS_TIME_TRAVELLED{description:"Hannah Kahnwald falsely tells police that she saw Ulrich assault Katharina, and he is briefly imprisoned. Katharina grows up thinking it was Regina Tiedemann who told the lie."}]->(t3),
+(katharina)-[:HAS_TIME_TRAVELLED{description:"A distraught Katharina searches everywhere for her missing son Mikkel, and ends up climbing through the portal in the caves to an unknown time."}]->(t4),
+
+(ulrich)-[:HAS_TIME_TRAVELLED{description:"A Winden police officer, Ulrich obsessively investigates his son Mikkel's disappearance until he learns of Helge Doppler's involvement and follows him through time."}]->(t4),
+(ulrich)-[:HAS_TIME_TRAVELLED{description:"Thinking he can prevent Mikkel's disappearance if he kills young Helge, he attacks the young boy. Helge survives, but Ulrich winds up imprisoned in an asylum for life."}]->(t2),
+(ulrich)-[:HAS_TIME_TRAVELLED{description:"While an older Ulrich is still imprisoned, his past self is a teenager dating young Katharina, when his brother Mads goes missing (echoing Mikkel's disappearance 33 years later). Mads is killed in Noah's attempts to build a time machine."}]->(t3),
+
+(jana)-[:HAS_TIME_TRAVELLED{description:"Jana is a young girl living in Winden."}]->(t2),
+(jana)-[:HAS_TIME_TRAVELLED{description:"Now married to Tronte Nielsen, Jana plans to leave him due to his many affairs, but loses the strength to go through with it after her son Mads' disappearance"}]->(t3),
+(jana)-[:HAS_TIME_TRAVELLED{description:"After her grandson Mikkel's disappearance, an elderly Jana becomes convinced history is repeating itself. (If only she knew…)"}]->(t4),
+
+(tronte)-[:HAS_TIME_TRAVELLED{description:"Young Tronte arrives in Winden with his beautiful mother, Agnes, but no father. His arms are covered in burn marks. He experiments sexually with young Claudia Tiedemann."}]->(t2),
+(tronte)-[:HAS_TIME_TRAVELLED{description:"When his son Mads goes missing, he's a journalist now engaging in an affair with Claudia. It's likely he's the father of Claudia's daughter, Regina."}]->(t3),
+(tronte)-[:HAS_TIME_TRAVELLED{description:"On the night his grandson Mikkel disappeared, Tronte was called by Peter Doppler to help him move the body of his son Mads Nielsen (which had materialized from 1986) at the instruction of an older, time-travelling Claudia."}]->(t4),
+
+(agnes)-[:HAS_TIME_TRAVELLED{description:"Agnes is a young girl living in Winden."}]->(t1),
+(agnes)-[:HAS_TIME_TRAVELLED{description:"Agnes arrives in Winden with her son, Tronte; where she's been and what she's been doing since 1921 is unknown. She carries on an affair with Doris Tiedemann and is revealed to be a member of Sic Mundus and the sister of the mysterious Noah."}]->(t2),
+
+(noah)-[:HAS_TIME_TRAVELLED{description:"Young Noah is an acolyte of Sic Mundus and murders another member who lost his faith."}]->(t1),
+
+(elisabeth)-[:HAS_TIME_TRAVELLED{description:"Franziska's younger sister, who is deaf, is a silent observer to the chaos as several young boys — including her friend Yasin — disappear from Winden. She is one of the few who survives the apocalypse in a bunker, along with young Noah."}]->(t4),
+(elisabeth)-[:HAS_TIME_TRAVELLED{description:"An older Elisabeth is now the leader of a band of survivors who protect the secret of what's inside the ruined Winden nuclear power plant: the God particle. At some point since 2019, she and Noah conceived a daughter, who was hidden somewhere in time and grew up to be Charlotte, who eventually gave birth to Elisabeth, her own mother"}]->(t5),
+
+(franziska)-[:HAS_TIME_TRAVELLED{description:"Franziska is saved from the apocalypse by Adult Jonas/The Stranger, along with Magnus and Bartosz, whisked off somewhere in time."}]->(t4),
+
+(charlotte)-[:HAS_TIME_TRAVELLED{description:"Charlotte never knew her real parents, having been raised by grandfatherly clockmaker/author H.G. Tannhaus."}]->(t3),
+(charlotte)-[:HAS_TIME_TRAVELLED{description:"Now Winden's chief of police, Charlotte is dismayed to learn that child-killer Noah is her father — and even more confused to learn that her daughter, Elisabeth, is her mother. They touch hands across time at the moment of the apocalypse, their fates uncertain."}]->(t4),
+
+(tannhaus)-[:HAS_TIME_TRAVELLED{description:"Raising young Charlotte, Tannhaus given the blueprints for the time machine from a time-travelling Claudia Tiedemann, and a copy of his own book, A Journey Through Time, by a time-travelling Ulrich Nielsen. He builds the machine and writes the book, rendering both objects bootstrap paradoxes."}]->(t2),
+(tannhaus)-[:HAS_TIME_TRAVELLED{description:"Adult Jonas/The Stranger visits Tannhaus to repair his time machine."}]->(t3),
+
+(peter)-[:HAS_TIME_TRAVELLED{description:"Peter is married to police chief Charlotte, caring for his elderly father Helge, and carrying on an affair with a transgender sex worker named Benni. When Mads' body materializes before his eyes from 1986, he calls the boy's father, Tronte Nielsen, to help him dispose of it. Eventually, he rides out the apocalypse in the bunker. His exact origins are still unknown; no young Peter has ever been seen in the 1986 timeline, and who Peter's mother would be is a mystery."}]->(t4),
+
+(helge)-[:HAS_TIME_TRAVELLED{description:"Young Helge is attacked by a time-travelling Ulrich in an effort to preemptively prevent him from becoming Noah's accomplice. Helge survives, scarred and brain damaged, and becomes Noah's first successful time travel subject."}]->(t2),
+(helge)-[:HAS_TIME_TRAVELLED{description:"Adult Helge has been recruited by Noah to help him kidnap boys to use in his time travel experiments."}]->(t3),
+(helge)-[:HAS_TIME_TRAVELLED{description:"Old Helge remembers his role in the boys' deaths and travels back to 1986 to try to stop himself. He rams his car and Old Helge dies in the accident while Adult Helge survives."}]->(t4),
+
+(greta)-[:HAS_TIME_TRAVELLED{description:"After Helge's disappearance, his strict mother Greta sought counsel from Noah, admitting to the priest that her husband Bernd might not be Helge's father."}]->(t2),
+
+(bernd)-[:HAS_TIME_TRAVELLED{description:"Bernd supervises construction of Winden's nuclear power plant. The bodies of two unidentified boys (Noah's victims Erik Obendorf and Yasin Friese from 2019) are found on his construction site."}]->(t2),
+(bernd)-[:HAS_TIME_TRAVELLED{description:"Bernd passes the reins of his plant to Claudia Tiedemann, revealing to her that an accident that summer led to the disposal of many barrels of radioactive cesium in the caves beneath the town. (That cesium will later be used to power the time machine."}]->(t3),
+
+(bartosz)-[:HAS_TIME_TRAVELLED{description:"Bartosz started dating his best friend Jonas' ex-girlfriend Martha after Jonas was institutionalized following his father's suicide. After Martha falls back in love with Jonas, an embittered Bartosz is recruited to become Noah's new accomplice. He is saved from the apocalypse by Adult Jonas/The Stranger, along with Magnus and Franziska."}]->(t4),
+
+(boris)-[:HAS_TIME_TRAVELLED{description:"Aleksander arrives in Winden and buries a bag containing a gun and a passport revealing his real name: Boris Niewald. Hannah witnesses this and digs up the bag, keeping it to use to blackmail Aleksander. The newcomer saves Regina from an attack by Ulrich and Katharina, who believe she's the one who accused Ulrich of rape."}]->(t3),
+(boris)-[:HAS_TIME_TRAVELLED{description:"Aleksander now runs the plant formerly run by his wife's mother. The brother of the man whose identity he assumed — and who Aleksander presumably murdered — arrives in town under the guise of a special investigator named Clausen. Clausen opens the barrels of cesium while searching the plant and triggers the apocalypse."}]->(t4),
+
+
+(regina)-[:HAS_TIME_TRAVELLED{description:"Regina is a mousy girl frequently bullied by Katharina. When Katharina's boyfriend Ulrich is falsely accused of raping her, Katharina assumes it was Regina in retaliation for the bullying."}]->(t3),
+(regina)-[:HAS_TIME_TRAVELLED{description:"Regina runs the only hotel in Winden, but is stricken with cancer. She rides out the apocalypse in the bunker after being taken there by her time-travelling mother, Claudia, who's still the same age she was when she disappeared in 1986."}]->(t4),
+
+(claudia)-[:HAS_TIME_TRAVELLED{description:"Young Claudia tutors Helge Doppler and experiments sexually with Tronte Nielsen. Her dog Gretchen disappears in the caves under the plant."}]->(t2),
+(claudia)-[:HAS_TIME_TRAVELLED{description:"Adult Claudia takes over the plant from Bernd Doppler and, when Gretchen reappears from the caves after 33 years, starts to uncover the truth about time travel. She travels to 2019 to save her daughter from the apocalypse."}]->(t3),
+(claudia)-[:HAS_TIME_TRAVELLED{description:"Old Claudia arrives from the future as a time-travelling warrior opposing Adam, instructing Young Jonas on his role in the war. She is eventually killed by Noah."}]->(t4),
+
+(doris)-[:HAS_TIME_TRAVELLED{description:"Claudia's mother Doris rents a room to the newly-arrived Agnes Nielsen and her son Tronte. Doris and Agnes carry on an affair, decades before their children Claudia and Tronte will do the same."}]->(t2),
+
+(egon)-[:HAS_TIME_TRAVELLED{description:"An officer serving under police chief Daniel Kahnwald, Egon investigates the deaths of the two unidentified boys, as well as the attack on Helge Doppler. He arrests a time-travelling Ulrich Nielsen for the crimes, and the man is locked up for life."}]->(t2),
+(egon)-[:HAS_TIME_TRAVELLED{description:"An elderly Egon comes to suspect the truth about time travel. When a time-travelling Claudia learns that her father will die, she tries to prevent his death — only to cause it."}]->(t3)

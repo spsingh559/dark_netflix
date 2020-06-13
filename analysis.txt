@@ -1,0 +1,49 @@
+//About Jonas
+
+match (p:Person)-[r]-(others) where p.name="Jonas Kahnwald" return p.name as name,type(r) as relationType,r.name as relation, r.description as descriptionOfTimeTravel,others.name as relationWith
+order by relationWith
+
+//About Ulrich
+match (p:Person)-[r]-(others) where p.name="Ulrich Nielsen" return others.name as relationWith,type(r) as relationType,r.name as relation, r.description as descriptionOfTimeTravel, p.name as name
+order by relationWith
+
+//claudia tiedermann
+match (p:Person)-[r]-(others) where p.name="Claudia Tiedermann" return others.name as relationWith,type(r) as relationType,r.name as relation, r.description as descriptionOfTimeTravel,p.name as name
+order by relationWith
+
+//find shortest path between jonas and Claudia
+MATCH path = shortestPath((p:Person)-[:HAS_RELATION*..15]-(a:Person)) 
+WHERE p.name = "Jonas Kahnwald" AND a.name = "Claudia Tiedermann"
+RETURN path
+
+//find shortest path between jonas and Helge
+MATCH path = shortestPath((p:Person)-[:HAS_RELATION*..15]-(a:Person)) 
+WHERE p.name = "Jonas Kahnwald" AND a.name = "Helge Doppler"
+RETURN path
+
+//people travel to 1921
+match (p:Person)-[r:HAS_TIME_TRAVELLED]-(t:Timeline) where t.name=1921
+return t.name as timeline, p.name, r.description as whatHappendeInThatTimeline
+
+//people travel to 1953
+match (p:Person)-[r:HAS_TIME_TRAVELLED]-(t:Timeline) where t.name=1953
+return t.name as timeline, p.name, r.description as whatHappendeInThatTimeline
+
+//people travel to 1986
+match (p:Person)-[r:HAS_TIME_TRAVELLED]-(t:Timeline) where t.name=1986
+return t.name as timeline, p.name, r.description as whatHappendeInThatTimeline
+
+//community detection
+CALL gds.louvain.stream({
+    nodeProjection: 'Person',
+    relationshipProjection: {
+        TYPE: {
+            type: 'HAS_RELATION',
+            orientation: 'undirected',
+            aggregation: 'NONE'
+        }
+    },
+    includeIntermediateCommunities: true
+}) YIELD nodeId, communityId
+RETURN gds.util.asNode(nodeId).name AS name, communityId
+ORDER BY communityId ASC
